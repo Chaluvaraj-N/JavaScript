@@ -10,3 +10,4 @@ function add(a,b){
     console.log(res)
 }
 add(100,200)
+history 
