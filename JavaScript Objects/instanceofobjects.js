@@ -1,5 +1,6 @@
-var car = new object()
-car.name="BMW"
-car.model=2026
-car.color="red"
+let Car = {}
+let car = new Object()
+    car.name="BMW"
+    car.model=2026
+    car.color="red"
 console.log(car)
