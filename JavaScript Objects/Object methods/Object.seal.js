@@ -1,12 +1,20 @@
-user.city="mysore"
-console.log(user)
-{
-    name:"raj"
-    age:36
-}
-delete user.age
-console.log(user)
-{
-    name:"raj"
-    age:36
-}
+let user = {
+    name: "raj",
+    age: 36
+};
+
+Object.seal(user);
+
+user.city = "mysore";
+
+console.log(user);  
+
+delete user.age;
+
+console.log(user);  
+
+Object.seal(user);
+
+console.log(user.age);
+
+console.log(user);
