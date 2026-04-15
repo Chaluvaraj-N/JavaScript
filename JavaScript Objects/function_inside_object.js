@@ -17,4 +17,4 @@ console.log(person.skill[1])
 console.log(person.address.city)
 console.log(person.eat)
 person.eat()
-// person.play()
+// person.play() error
