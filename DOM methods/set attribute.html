@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>DOM setAttribute() Examples</title>
+	<style>
+		body { font-family: Arial, sans-serif; margin: 24px; line-height: 1.5; }
+		section { border: 1px solid #ddd; padding: 14px; border-radius: 8px; margin-bottom: 14px; }
+		button { margin: 6px 6px 0 0; }
+		.highlight { background: #fff3cd; color: #7a5a00; padding: 6px 8px; border-radius: 4px; }
+		img { display: block; margin-top: 8px; border-radius: 6px; }
+	</style>
+</head>
+<body>
+	<h1>DOM <code>setAttribute()</code> Demo</h1>
+
+	<section>
+		<h2>1) Image Attribute Change</h2>
+		<button id="changeImgBtn">Change Image (src/alt/width)</button>
+		<img
+			id="demoImg"
+			src="https://picsum.photos/id/1069/300/180"
+			alt="Initial sample image"
+			width="300"
+			height="180"
+		/>
+	</section>
+
+	<section>
+		<h2>2) Checkbox Attributes</h2>
+		<label>
+			<input id="agreeBox" type="checkbox" /> I agree
+		</label>
+		<div>
+			<button id="checkBtn">setAttribute('checked', 'checked')</button>
+			<button id="disableBtn">setAttribute('disabled', 'true')</button>
+			<button id="enableBtn">removeAttribute('disabled')</button>
+		</div>
+	</section>
+
+	<section>
+		<h2>3) Generic Element Attribute</h2>
+		<p id="targetText">Watch my attributes change.</p>
+		<button id="attrBtn">Set class, title, data-info, id</button>
+	</section>
+
+	<section>
+		<h2>4) Input Attributes</h2>
+		<input id="nameInput" type="text" placeholder="Type here" />
+		<div>
+			<button id="inputAttrBtn">Set type/placeholder/value/maxlength</button>
+			<button id="readonlyBtn">Set readonly</button>
+			<button id="editableBtn">Remove readonly</button>
+		</div>
+	</section>
+
+	<script>
+		// 1) Image change using setAttribute
+		document.getElementById('changeImgBtn').addEventListener('click', function () {
+			const img = document.getElementById('demoImg');
+			img.setAttribute('src', 'https://picsum.photos/id/1025/340/200');
+			img.setAttribute('alt', 'Changed image using setAttribute');
+			img.setAttribute('width', '340');
+		});
+
+		// 2) Checkbox attribute control
+		const agreeBox = document.getElementById('agreeBox');
+		document.getElementById('checkBtn').addEventListener('click', function () {
+			agreeBox.setAttribute('checked', 'checked');
+		});
+		document.getElementById('disableBtn').addEventListener('click', function () {
+			agreeBox.setAttribute('disabled', 'true');
+		});
+		document.getElementById('enableBtn').addEventListener('click', function () {
+			agreeBox.removeAttribute('disabled');
+		});
+
+		// 3) Generic element attributes
+		document.getElementById('attrBtn').addEventListener('click', function () {
+			const p = document.getElementById('targetText');
+			p.setAttribute('class', 'highlight');
+			p.setAttribute('title', 'Tooltip from setAttribute');
+			p.setAttribute('data-info', 'custom-data-value');
+			p.setAttribute('id', 'updatedTextId');
+			p.textContent = 'Attributes updated: class, title, data-info, id';
+		});
+
+		// 4) Input attributes
+		const input = document.getElementById('nameInput');
+		document.getElementById('inputAttrBtn').addEventListener('click', function () {
+			input.setAttribute('type', 'email');
+			input.setAttribute('placeholder', 'Enter your email');
+			input.setAttribute('value', 'example@mail.com');
+			input.setAttribute('maxlength', '30');
+		});
+		document.getElementById('readonlyBtn').addEventListener('click', function () {
+			input.setAttribute('readonly', 'true');
+		});
+		document.getElementById('editableBtn').addEventListener('click', function () {
+			input.removeAttribute('readonly');
+		});
+
+        let abbrev = document.createElement('abbr');
+        abbrev.setAttribute('title', 'HyperText Markup Language');
+        abbrev.textContent = 'RCB';
+        abbrevation.setAttribute('title', 'Royal Challengers Bangalore');   
+        document.body.appendChild(abbrev);
+	</script>
+</body>
+</html>
