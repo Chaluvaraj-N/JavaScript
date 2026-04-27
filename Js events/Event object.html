@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>example for event objects</h1>
+    <button onclick="clickHandler()">click for event object</button>
+    <script>
+        function clickHandler(event){
+            console.log(event.target)
+            console.log(event.type)
+            console.log(event.target.value)
+            event.target.style.background="blue"
+            for(var data in value){
+                console.log(data)
+            }
+        }
+    </script>
+</body>
+</html>
