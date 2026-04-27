@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Form Validation Demo</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background: #0e0e0e;
+			margin: 0;
+			padding: 30px;
+		}
+		.card {
+			max-width: 520px;
+			margin: 0 auto;
+			background: #5886a3;
+			padding: 24px;
+			border-radius: 12px;
+			box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+		}
+		h1 {
+			text-align: center;
+			margin-top: 0;
+		}
+		.field {
+			margin-bottom: 14px;
+		}
+		label {
+			display: block;
+			margin-bottom: 6px;
+			font-weight: bold;
+		}
+		input, select, textarea {
+			width: 100%;
+			padding: 10px;
+			border: 1px solid #152538;
+			border-radius: 8px;
+			box-sizing: border-box;
+		}
+		.error {
+			color: #d93025;
+			font-size: 0.9rem;
+			margin-top: 5px;
+			min-height: 18px;
+		}
+		.actions {
+			display: flex;
+			gap: 10px;
+			margin-top: 18px;
+		}
+		button, input[type="submit"] {
+			background: #2563eb;
+			color: #fff;
+			border: none;
+			cursor: pointer;
+			padding: 11px 16px;
+			border-radius: 8px;
+			font-size: 1rem;
+		}
+		button[type="reset"] {
+			background: #64748b;
+		}
+		.success {
+			margin-top: 16px;
+			color: #166534;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<div class="card">
+		<h1>Form Validation</h1>
+		<form id="myForm" novalidate>
+			<div class="field">
+				<label for="name">Full Name</label>
+				<input type="text" id="name" name="name" placeholder="Enter your name">
+				<div class="error" id="nameError"></div>
+			</div>
+
+			<div class="field">
+				<label for="email">Email</label>
+				<input type="email" id="email" name="email" placeholder="Enter your email">
+				<div class="error" id="emailError"></div>
+			</div>
+
+			<div class="field">
+				<label for="phone">Phone Number</label>
+				<input type="tel" id="phone" name="phone" placeholder="10-digit phone number">
+				<div class="error" id="phoneError"></div>
+			</div>
+
+			<div class="field">
+				<label for="age">Age</label>
+				<input type="number" id="age" name="age" min="1" placeholder="Enter your age">
+				<div class="error" id="ageError"></div>
+			</div>
+
+			<div class="field">
+				<label for="password">Password</label>
+				<input type="password" id="password" name="password" placeholder="Create a password">
+				<div class="error" id="passwordError"></div>
+			</div>
+
+			<div class="field">
+				<label for="confirmPassword">Confirm Password</label>
+				<input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter password">
+				<div class="error" id="confirmPasswordError"></div>
+			</div>
+
+			<div class="field">
+				<label for="gender">Gender</label>
+				<select id="gender" name="gender">
+					<option value="">Select gender</option>
+					<option value="male">Male</option>
+					<option value="female">Female</option>
+					<option value="other">Other</option>
+				</select>
+				<div class="error" id="genderError"></div>
+			</div>
+
+			<div class="field">
+				<label for="bio">Short Bio</label>
+				<textarea id="bio" name="bio" rows="4" placeholder="Tell something about yourself"></textarea>
+				<div class="error" id="bioError"></div>
+			</div>
+
+			<div class="field">
+				<label>
+					<input type="checkbox" id="terms"> I agree to the terms and conditions
+				</label>
+				<div class="error" id="termsError"></div>
+			</div>
+
+			<div class="actions">
+				<input type="submit" value="Submit">
+				<button type="reset">Reset</button>
+			</div>
+
+			<div class="success" id="successMessage"></div>
+		</form>
+	</div>
+
+	<script>
+		const form = document.getElementById('myForm');
+		const successMessage = document.getElementById('successMessage');
+
+		function setError(id, message) {
+			document.getElementById(id).textContent = message;
+		}
+
+		function clearErrors() {
+			['nameError', 'emailError', 'phoneError', 'ageError', 'passwordError', 'confirmPasswordError', 'genderError', 'bioError', 'termsError']
+				.forEach(id => setError(id, ''));
+			successMessage.textContent = '';
+		}
+
+		form.addEventListener('submit', function(event) {
+			event.preventDefault();
+			clearErrors();
+
+			const name = document.getElementById('name').value.trim();
+			const email = document.getElementById('email').value.trim();
+			const phone = document.getElementById('phone').value.trim();
+			const age = document.getElementById('age').value.trim();
+			const password = document.getElementById('password').value;
+			const confirmPassword = document.getElementById('confirmPassword').value;
+			const gender = document.getElementById('gender').value;
+			const bio = document.getElementById('bio').value.trim();
+			const terms = document.getElementById('terms').checked;
+
+			let isValid = true;
+
+			if (name.length < 3) {
+				setError('nameError', 'Name must be at least 3 characters.');
+				isValid = false;
+			}
+
+			const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+			if (!emailPattern.test(email)) {
+				setError('emailError', 'Enter a valid email address.');
+				isValid = false;
+			}
+
+			const phonePattern = /^[0-9]{10}$/;
+			if (!phonePattern.test(phone)) {
+				setError('phoneError', 'Phone number must be exactly 10 digits.');
+				isValid = false;
+			}
+
+			if (age === '' || Number(age) < 18) {
+				setError('ageError', 'You must be at least 18 years old.');
+				isValid = false;
+			}
+
+			if (password.length < 8) {
+				setError('passwordError', 'Password must be at least 8 characters.');
+				isValid = false;
+			}
+
+			if (password !== confirmPassword) {
+				setError('confirmPasswordError', 'Passwords do not match.');
+				isValid = false;
+			}
+
+			if (gender === '') {
+				setError('genderError', 'Please select your gender.');
+				isValid = false;
+			}
+
+			if (bio.length < 10) {
+				setError('bioError', 'Bio should be at least 10 characters.');
+				isValid = false;
+			}
+
+			if (!terms) {
+				setError('termsError', 'You must accept the terms.');
+				isValid = false;
+			}
+
+			if (isValid) {
+				successMessage.textContent = 'Form submitted successfully!';
+				form.reset();
+			}
+		});
+
+		form.addEventListener('reset', clearErrors);
+	</script>
+</body>
+</html>
