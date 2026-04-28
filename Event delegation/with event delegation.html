@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    #parent{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        width: 400px;
+        height: 400px;
+        border: 10px solid goldenrod;
+    }
+    button{
+        margin: 10px;
+        width: 100px;
+        height: 50px;
+        background-color: lightblue;
+        border-color: burlywood;
+        border-width: 2px;
+        border-radius: 50%;
+    }
+</style>
+</head>
+<body>
+    <h1>Example with using event delegation</h1>
+    <div id="parent">
+        <button class="btn">click 1</button>
+        <button class="btn">click 2</button>
+        <button class="btn">click 3</button>
+        <button class="btn">click 4</button>
+    </div>
+
+    <script>
+        let parent = document.getElementById("parent")
+        parent.addEventListener("click", function(event) {
+            if(event.target.classList.contains("btn")) {
+                alert(event.target.innerText + " was clicked!");
+            }
+        });
+    </script>
+
+</body>
+</html>
