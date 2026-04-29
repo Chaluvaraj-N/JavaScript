@@ -18,12 +18,14 @@
         let sayHello=() => {
             console.log('Hello, World!');
         }
+        alert('Timer started');
         let timerID = setInterval(sayHello, 3000);
         console.log(timerID); // This will log the interval ID to the console
         // To stop the interval after 10 seconds
         setTimeout(() => {
             clearInterval(timerID);
-                console.log('timer stopped');
+            console.log('timer stopped');
+            alert('Timer stopped');
         }, 10000);
     </script>
 </body>
