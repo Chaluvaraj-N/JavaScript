@@ -1,3 +1,5 @@
+var date = new Date() // create a new date object with the current date and time
+console.log(date)
 //methods of data objects
 //1. getDate() method is used to get the current date
 var currentDate = date.getDate()
